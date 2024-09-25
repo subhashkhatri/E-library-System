@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Book</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #container {
+            height: 600px;
+            width: 600px;
+            background-color: rgba(138, 94, 179, 0.389);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            box-shadow: 5px 5px 10px black;
+        }
+
+        #heading {
+            font-size: 40px;
+            color: white;
+            text-shadow: 2px 2px 2px red;
+        }
+
+        input,
+        select {
+            height: 45px;
+            width: 300px;
+            border: none;
+            outline: none;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px black;
+        }
+
+        button {
+            height: 40px;
+            width: 150px;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            text-shadow: 1px 1px 2px black;
+            box-shadow: 2px 2px 5px black;
+
+        }
+
+        button:hover {
+            background-color: black;
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+            color: blue;
+            font-size: 20px;
+        }
+
+       
+
+        #subContainer {
+            width: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        label{
+			font-size: 25px;
+			font-weight: bold;
+		}
+    </style>
+</head>
+<body>
+    
+    <form id="container" th:action="@{/books/add}" th:object="${book}" method="post">
+		<h1 id="heading">Add Book</h1>
+        <label for="title">Title:</label>
+        <input type="text" id="title" placeholder="Enter Title" name="title" th:field="*{title}" />
+        <label for="author">Author:</label>
+        <input type="text" id="author" placeholder="Enter Author" name="author" th:field="*{author}" />
+        <label for="category">Category:</label>
+        <select id="category" name="category" th:field="*{category}">
+            <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
+        </select>
+        <button type="submit">Add</button>
+        <a href="/books">Go Back</a>
+    </form>
+</body>
+</html>

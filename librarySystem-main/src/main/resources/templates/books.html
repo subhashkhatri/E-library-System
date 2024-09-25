@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Books</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            height: 100%;
+            width: 100%;
+            background-color: beige;
+        }
+
+        #container {
+            height: 600px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            overflow-y: auto;
+        }
+
+        #details {
+            height: 400px;
+            width: 700px;
+            border: 2px solid black;
+            overflow-y: auto;
+        }
+
+        th {
+            color: rgb(255, 0, 0);
+            text-shadow: 1px 1px 2px rgb(0, 0, 0);
+            font-size: 20px;
+        }
+
+        tr,
+        th,
+        td {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.119);
+            width: 140px;
+            height: 40px;
+            text-align: center;
+        }
+
+        #heading {
+            font-size: 35px;
+            letter-spacing: 5px;
+            word-spacing: 10px;
+            text-shadow: 1px 1px 2px black,2px 2px 2px red;;
+        }
+        #subContainer{
+            height: 50px;
+            width: 600px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .links{
+            text-decoration: none;
+            color:  blue;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        .actionButtons{
+			text-decoration: none;
+            font-weight: bold;
+		}
+		#borrow{
+			color: green;
+		}
+		#return{
+			color: orange;
+		}
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1 id="heading">Books</h1>
+        <div id="subContainer">
+            <a class="links" href="/books/add">Add Book</a>
+            <a class="links" href="/categories">Categories</a>
+            <a class="links" href="/books">Go Back</a>
+        </div>
+        <div id="details">
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Borrowed</th>
+                    <th>Actions</th>
+                </tr>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.title}">Title</td>
+                    <td th:text="${book.author}">Author</td>
+                    <td th:if="${book.category!=null}" th:text="${book.category.name}">Category</td>
+                    <td th:text="${book.borrowed ? 'Yes' : 'No'}">Borrowed</td>
+                    <td>
+                        <a class="actionButtons" id="borrow" th:if="${!book.borrowed}" th:href="@{/books/borrow/{id}(id=${book.id})}">Borrow</a>
+                        <a class="actionButtons" id="return" th:if="${book.borrowed}" th:href="@{/books/return/{id}(id=${book.id})}">Return</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

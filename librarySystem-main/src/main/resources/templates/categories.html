@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Categories</title>
+	<style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            height: 100%;
+            width: 100%;
+
+        }
+
+        #container {
+            height: 600px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            overflow-y: auto;
+        }
+        th {
+            color: rgb(255, 0, 0);
+            text-shadow: 1px 1px 2px rgb(0, 0, 0);
+            font-size: 20px;
+        }
+
+        tr,
+        th,
+        td {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.119);
+            width: 140px;
+            height: 40px;
+            text-align: center;
+        }
+
+        #heading {
+			color: aqua;
+            font-size: 40px;
+            letter-spacing: 5px;
+            word-spacing: 10px;
+            text-shadow: 1px 1px 2px red;
+        }
+        #subContainer{
+            height: 50px;
+            width: 500px;
+            display: flex;
+            justify-content: space-between;
+        }
+        a{
+            text-decoration: none;
+            color:  black;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        .links{
+			color:blue;
+		}
+		 #details {
+            height: 400px;
+            width: 500px;
+            border: 2px solid black;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+
+<body>
+	<div id="container">
+		<h1 id="heading">Categories</h1>
+		<div id="subContainer">
+			<a href="/categories/add">Add Category</a>
+			<a href="/books">Go Back</a>
+		</div>
+	<div id="details">
+	<table>
+		<tr>
+			<th>Name</th>
+		</tr>
+		<tr th:each="category : ${categories}">
+			<td>
+				<a class="links" th:href="@{/books/findedCategories/{categoryName}(categoryName=${category.name})}"
+					th:text="${category.name}">
+				</a>
+			</td>
+		</tr>
+	</table>
+	</div>
+	</div>
+</body>
+
+</html>

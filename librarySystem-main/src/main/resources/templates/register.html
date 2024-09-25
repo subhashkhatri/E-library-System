@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Register</title>
+	<style>
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+
+		body,
+		form {
+			height: 100vh;
+			width: 100%;
+			/* background-color: beige; */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#container {
+			height: 400px;
+			width: 600px;
+			background-color: rgb(79, 118, 118);
+			border-radius: 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: space-around;
+			box-shadow: 5px 5px 10px black;
+		}
+
+		#title {
+			font-size: 40px;
+			color: white;
+			text-shadow: 2px 2px 2px red;
+		}
+
+		input {
+			height: 45px;
+			width: 300px;
+			border: none;
+			outline: none;
+			padding-left: 10px;
+			padding-right: 10px;
+			font-size: 20px;
+			font-weight: bold;
+			border-radius: 5px;
+			box-shadow: 2px 2px 10px black;
+		}
+
+		button {
+			height: 40px;
+			width: 150px;
+			font-size: 28px;
+			font-weight: bold;
+			letter-spacing: 2px;
+			border: none;
+			outline: none;
+			border-radius: 5px;
+			text-shadow: 1px 1px 2px black;
+			box-shadow: 2px 2px 5px black;
+
+		}
+
+		button:hover {
+			background-color: black;
+			color: white;
+		}
+
+		a {
+			text-decoration: none;
+			color: blue;
+			font-size: 20px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<form th:action="@{/users/register}" th:object="${user}" method="post">
+		<div id="container">
+			<h1 id="title">Register</h1>
+			<input type="text" id="username" placeholder="Enter User Name" name="username" ` th:field="*{username}" />
+			<input type="password" id="password" placeholder="Enter Password" name="password" th:field="*{password}" />
+			<button type="submit">Register</button>
+			<a href="/users/login">Already have an account ? </a>
+		</div>
+	</form>
+</body>
+
+</html>
